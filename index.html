@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Talk Rehearsal & Delivery - Make Jehovah Your Stronghold</title>
   
+  <!-- Web App / PWA Meta Tags -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0f172a">
+  
+  <!-- Inline Web App Manifest for Standalone Display -->
+  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Talk%20Assistant%22%2C%22short_name%22%3A%22TalkAssist%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%230f172a%22%7D">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
@@ -535,6 +544,45 @@
             }
           });
         }
+      }, []);
+
+      // --- WAKE LOCK (Keep screen awake) ---
+      useEffect(() => {
+        let wakeLock = null;
+
+        const requestWakeLock = async () => {
+          if ('wakeLock' in navigator) {
+            try {
+              wakeLock = await navigator.wakeLock.request('screen');
+              console.log('Screen Wake Lock active');
+              
+              wakeLock.addEventListener('release', () => {
+                console.log('Screen Wake Lock released');
+              });
+            } catch (err) {
+              console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+            }
+          }
+        };
+
+        // Request immediately on mount
+        requestWakeLock();
+
+        // Re-request when the app comes back to the foreground
+        const handleVisibilityChange = () => {
+          if (wakeLock !== null && document.visibilityState === 'visible') {
+            requestWakeLock();
+          }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+          if (wakeLock !== null) {
+            wakeLock.release();
+          }
+        };
       }, []);
 
       // Auto-save changes locally and to cloud
