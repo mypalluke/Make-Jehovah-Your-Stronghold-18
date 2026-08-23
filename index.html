@@ -3,16 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Talk Rehearsal & Delivery - Make Jehovah Your Stronghold</title>
+  <title>Make Jehovah Your Stronghold</title>
   
-  <!-- Web App / PWA Meta Tags -->
-  <meta name="mobile-web-app-capable" content="yes">
+  <!-- PWA & Standalone Web App Meta Tags -->
+  <meta name="theme-color" content="#0f172a">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0f172a">
+  <meta name="mobile-web-app-capable" content="yes">
   
-  <!-- Inline Web App Manifest for Standalone Display -->
-  <link rel="manifest" href="data:application/manifest+json;charset=utf-8,%7B%22name%22%3A%22Talk%20Assistant%22%2C%22short_name%22%3A%22TalkAssist%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230f172a%22%2C%22theme_color%22%3A%22%230f172a%22%7D">
+  <link rel="manifest" href='data:application/manifest+json;utf8,{"name":"Stronghold Talk","short_name":"Stronghold","start_url":".","display":"standalone","background_color":"#0f172a","theme_color":"#0f172a","icons":[{"src":"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTEyIDIycy04LTQuNS04LTExLjVWN2w4LTNMMjAgN3Y0LjVjMCA3LTggMTEuNS04IDExLjV6Ii8+PC9zdmc+","sizes":"192x192","type":"image/svg+xml"}]}'>
 
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -41,6 +40,17 @@
     }
     textarea {
       resize: vertical;
+    }
+    /* Hide scrollbar for cleaner app look */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #334155;
+      border-radius: 10px;
     }
   </style>
 </head>
@@ -85,7 +95,6 @@
         const userId = auth.currentUser?.uid;
         if (!userId) return;
 
-        // Ensure we follow Rule 1 for private user data
         const docRef = doc(db, 'artifacts', appId, 'users', userId, 'talk_settings', 'stronghold_v1');
 
         onSnapshot(docRef, (snapshot) => {
@@ -147,8 +156,8 @@
         borderColor: 'border-blue-700/50',
         cards: [
           { id: 'i1', trigger: 'The Picnic & Deceptive Breeze', details: ['Park picnic with friends; sudden dark sky.', 'Cool, refreshing breeze sweeps across.', 'Deceptive downdraft turns into gale-force winds.'] },
-          { id: 'i2', trigger: 'Two Shelters: Pavilion vs House', details: ['Option 1: Open picnic pavilion (looks safe, but no walls).', 'Option 2: Enclosed brick building down the road (takes effort, but safe).'] },
-          { id: 'i3', trigger: 'The Forecast & The Choice', details: ['A greater storm approaching: The Great Tribulation.', 'Destruction of false religion, attack on God\'s people, Armageddon.', 'Where will you stand?'] }
+          { id: 'i2', trigger: 'Two Shelters: Pavilion vs House', details: ['Option 1: Open picnic pavilion (looks safe, no walls, illusion).', 'Option 2: Enclosed brick building down the road (takes effort, but safe).'] },
+          { id: 'i3', trigger: 'The Forecast & The Choice', details: ['A greater storm approaching: The Great Tribulation.', 'Destruction of false religion, attack on God\'s people, Armageddon.', 'Where will you stand? Lulled by the breeze or inside the fortress?'] }
         ]
       },
       {
@@ -160,8 +169,8 @@
         borderColor: 'border-amber-700/50',
         cards: [
           { id: 'f1', trigger: 'Seeking Refuge in Panic', details: ['Rev 6:16, 17 - People will panic and run to human organizations.', 'Like running into an open pavilion without walls.'] },
-          { id: 'f2', trigger: 'The True Stronghold', details: ['Nahum 1:6, 7 - Jehovah is a stronghold.', 'A stronghold only protects those already inside when the storm hits.'] },
-          { id: 'f3', trigger: 'Faithfulness in the Least', details: ['Luke 16:10 - Built day by day in routine choices right now.', 'Can\'t wait for lightning to strike to run for cover.'] }
+          { id: 'f2', trigger: 'The True Stronghold', details: ['Nahum 1:6, 7 - Jehovah is a stronghold.', 'He cares for those seeking refuge (Study Bible note).', 'Lightning strikes: terrifying realization if you waited too long.'] },
+          { id: 'f3', trigger: 'Faithfulness in the Least', details: ['Luke 16:10 - Faithful in least is faithful in much.', 'Small decisions build faith before the storm hits.', 'Can\'t wait for a major test to build the relationship.'] }
         ]
       },
       {
@@ -172,9 +181,9 @@
         textColor: 'text-emerald-400',
         borderColor: 'border-emerald-700/50',
         cards: [
-          { id: 'w1', trigger: '1. Uphold God\'s Moral Laws', details: ['Proverbs 10:29a - A clean, elevated highway.', 'The world subtly redefines morality (e.g. "cohabitating", "affair").', 'Colossians 3:5 & Mark 9:43 - Deaden sinful desires decisively.'] },
-          { id: 'w2', trigger: '2. Do Not Put Wealth Ahead', details: ['Proverbs 18:11 - A protective wall in his imagination.', 'What are we willing to do to get more wealth?', 'Proverbs 11:1 - Will we sacrifice financial gain for a clean conscience?'] },
-          { id: 'w3', trigger: '3. Make God\'s Will Your Priority', details: ['Proverbs 3:6 - The lens for every decision, big or small.', 'Do schedules reflect spiritual things come first?', 'Builds a muscle memory of obedience.'] }
+          { id: 'w1', trigger: '1. Uphold God\'s Moral Laws', details: ['Proverbs 10:29a - Moral laws are impenetrable walls.', 'Are my personal boundaries aligned with Jehovah\'s?', 'Colossians 3:5 & Mark 9:43 - Deaden sinful desires decisively.'] },
+          { id: 'w2', trigger: '2. Do Not Put Wealth Ahead', details: ['Proverbs 18:11 - An imaginary wall. What are we willing to do for it?', 'Thailand example: Danger of wanting what others have.', 'Proverbs 11:1 - Honest scales in our daily business.'] },
+          { id: 'w3', trigger: '3. Make God\'s Will Your Priority', details: ['Proverbs 3:5, 6 - The lens for every decision, big or small.', 'Do schedules reflect spiritual things come first?', 'Builds a muscle memory of obedience.'] }
         ]
       },
       {
@@ -187,8 +196,8 @@
         cards: [
           { id: 's1', trigger: '1. Serious Health Problems', details: ['Psalm 37:39, 40 - Jehovah is a fortress in distress.', 'Apostle Paul\'s thorn in the flesh.', 'Be realistic about limitations, stay active, accept help.'] },
           { id: 's2', trigger: '2. Conflicts with Believers', details: ['Doorway illustration: bumping into someone in the rain.', 'Colossians 3:13 - Forgiving small offenses is training for the future.', 'Don\'t argue out in the storm; step inside together!'] },
-          { id: 's3', trigger: '3. Opposition or Loved Ones Leaving', details: ['David trusted Jehovah when hunted by Saul.', 'Family leaving is like wandering into the storm.', 'Chasing them out puts our footing at risk; keep the lights on.'] },
-          { id: 's4', trigger: '(IF TIME) Joy in the Stronghold', details: ['Psalm 5:11, 12 - Beautiful reality of living under God\'s protection.', 'A shield puts something between us and the danger.', 'We rejoice in our refuge—confidence, not hiding in terror.'] }
+          { id: 's3', trigger: '3. Opposition or Loved Ones Leaving', details: ['Psalm 18:19 - Rescued by God from opposers.', 'Loved ones leaving is like wandering into the storm.', 'Chasing them out puts our footing at risk; keep the lights on.'] },
+          { id: 's4', trigger: '4. Living Under God\'s Protection (IF TIME)', details: ['Psalm 5:11, 12 - Surrounded by a shield of approval.', 'We may come in sopping wet, but we can recover.', 'Rejoicing in complete confidence in our refuge.'] }
         ]
       },
       {
@@ -206,19 +215,19 @@
 
     const DEFAULT_SCRIPTS = {
       i1: `Picture yourself at a park on a warm afternoon. You are having a wonderful time with family and friends—picnicking, throwing a ball around, laughing, and relaxing.\n\nOff in the distance, the sky turns dark and thunder rumbles. But then, a cool, refreshing breeze sweeps across the field. It feels fantastic after the heat of the day! You think to yourself: "Ah, I don't want to pack up yet. It feels so nice out! Just a few more minutes."\n\nSo you keep playing. But that cool breeze is deceptive—it’s the front of a dangerous storm cell. Within moments, gale-force winds hit, the sky turns pitch black, and heavy rain pours down.`,
-      i2: `Caught out in the open as the skies open up, where do you run?\n\nOption 1: Right nearby in the park is an open picnic pavilion. It has a roof, it’s close, and it takes very little effort to reach.\n\nOption 2: Down the road, however, is a sturdy, enclosed brick building. You'll have to run through the rain to get to it, but it has a solid foundation and four walls.\n\nMany people run straight for the pavilion because it looks like shelter. But an open-sided shelter during a severe storm is a dangerous illusion. It might keep the drizzle off your head for a moment, but with no walls, it offers zero real protection. The enclosed building takes effort to reach, but it is the only structure with the foundation and solid walls required to keep you safe.`,
-      i3: `A far greater storm is on the horizon—the Great Tribulation.\n\nJehovah’s forecast in scripture is certain: the destruction of false religion, an attack by a coalition of nations on God’s people, and the final war of Armageddon.\n\nWhen that storm hits, where will you be standing? Will you be lulled by the temporary, comfortable "breezes" of this world, sitting on the picnic blanket until it’s too late? Or will you be safely inside Jehovah’s solid fortress?`,
+      i2: `Caught out in the open as the skies open up, where do you run?\n\nOption 1: Right nearby in the park is an open picnic pavilion. It has a roof, it’s close, and it takes very little effort to reach.\n\nOption 2: Down the road, however, is a sturdy, enclosed brick building. You'll have to run through the rain to get to it, but it has a solid foundation and four walls.\n\nMany people run straight for the pavilion because it looks like shelter. But an open pavilion offers only an illusion of safety. It has no walls to protect you when severe weather strikes. In contrast, the enclosed brick building takes effort to reach, but it is the only structure with the foundation and solid walls required to keep you genuinely protected.`,
+      i3: `A different kind of storm is on the horizon—the Great Tribulation. This will be a fear-inspiring turn of events.\n\nJehovah’s forecast in scripture is certain: the destruction of false religion, an attack by a coalition of nations on God’s people, and the culmination of these events will result in the final war of Armageddon. All humans opposed to Jehovah God will be destroyed.\n\nWhen that storm hits, where will you be standing? Will you be lulled by the temporary, comfortable "breezes" of this world, sitting on the picnic blanket until it’s too late? Or will you be safely inside Jehovah’s solid fortress?`,
       f1: `Notice how mankind in general will react when that storm hits:\n\n(READ) Revelation 6:16, 17:\n"And they keep saying to the mountains and to the rocks: 'Fall over us and hide us from the face of the One seated on the throne and from the wrath of the Lamb, because the great day of their wrath has come, and who is able to stand?'"\n\nPeople will panic, running to whatever human organizations or political systems look big and convenient. That is like running into that open picnic pavilion. It looks substantial from a distance, and it feels easy in the moment, but without solid walls, it offers zero defense against the wrath of the Lamb. They ask a critical question: "Who is able to stand?"`,
-      f2: `The Bible gives us the comforting answer:\n\n(READ) Nahum 1:6, 7:\n\n"Who can stand before his indignation? And who can withstand the heat of his anger?... Jehovah is good, a stronghold in the day of distress. He is mindful of those seeking refuge in him."\n\nJehovah is an unshakeable stronghold.  What is a stronghold? It isn't a temporary tent or a flimsy umbrella; it is a permanent, heavily fortified structure designed to withstand the most violent assaults. \n\nOur Study Bible brings out an interesting point in the study note here. The original-language expression conveys the thought that Jehovah knows those taking refuge in him and cares for them.\n\nNotice again what Nahum says: 'Jehovah is good, a stronghold in the day of distress. He is mindful of those seeking refuge in him.' Jehovah is mindful of those who are seeking him. That makes this very personal.\n\nPicture that storm again. The sky suddenly turns black. Lightning strikes a tree just a short distance away. And in that instant, someone who had been sitting comfortably outside realizes: 'I should have gone into the brick house.'\n\nMaybe there is still an opportunity to run. Maybe the door is still open. But now the situation is completely different. The person isn't calmly walking toward shelter anymore. They're running through a violent storm, with lightning striking around them.\n\nWould you really want to wait until that moment to decide whether Jehovah is your stronghold? Why take that risk? Jehovah is already telling us where the safe place is. He is already inviting those seeking refuge in him to come to him. The time to make Jehovah our stronghold is now—not when the first lightning strikes.`,
-      f3: `And that's why what we do today matters so much. We don't want our first real test of trust in Jehovah to come when the storm is already overhead. Jesus said at Luke 16:10:\n"The person faithful in what is least is faithful also in much."\n\nSmall decision → repeated habit → established character → bigger test.\n\nEvery small decision to obey Jehovah is a kind of spiritual training. When we choose honesty when dishonesty would be easier, when we control our thoughts when nobody else would know, when we forgive instead of holding onto resentment, when we put spiritual things first even when we're tired—those may seem like small decisions. But they're building something inside us.\n\nSo when Jesus said that the person faithful in what is least is faithful also in much, he was highlighting a principle that can prepare us for something much bigger. We don't suddenly develop strong faith when a major test arrives. We reveal the faith we've been building all along.\n\nWe don't build our relationship with Jehovah when the biggest test of faith arrives. We build it through the small decisions we make every day. So how can we make Jehovah our stronghold now? Let's consider three areas where those daily decisions matter.`,
-      w1: `(READ) Proverbs 10:29a:\n"The way of Jehovah is a stronghold for the blameless one..."\n\nJehovah has laid out a clean, elevated highway for us. Staying on this road guarantees safety. But stepping off this road—relying on human moral thinking—is like stepping off a paved path into slick mud and sharp rocks during a downpour.\n\nNotice how subtly the world tries to lure us off that road. Society continually redefines morality to make it comfortable. People rarely say someone is "living in sin"—they say they are "cohabitating." It’s no longer called "adultery"—it’s "having an affair." It’s not "homosexuality"—it’s an "alternative lifestyle." Do we adopt this slick, soft language? When we do, we slowly weaken our moral defenses.\n\nColossians 3:5 urges us to "Deaden, therefore, your body members..." Jesus used vivid language when he said that if your hand makes you stumble, cut it off (Mark 9:43). He wasn't talking about self-mutilation; he was talking about radical, decisive action in our daily choices.\n\nIf you are single, do you view dating as casual recreation, or are you guarding your moral boundaries today? [PAUSE for 3 seconds]\n\nIf you are married, do you reject subtle flirting or the private trap of pornography? [PAUSE for 3 seconds]\n\nDeadening sinful desires feels as hard as cutting off a hand if we try to do it alone. But when we pray, read God's Word daily, and stay close to the congregation, Jehovah gives us the strength to remain blameless inside his stronghold.`,
-      w2: `(READ) Proverbs 18:11:\n"The wealth of the rich is his fortified city; it is like a protective wall in his imagination."\n\nNotice that last expression: "in his imagination."\n\nMoney can certainly provide a measure of security. Having savings can help us through an unexpected repair, a period of unemployment, or a serious financial setback. So the Bible isn't teaching that having money is inherently wrong.\n\nBut money cannot be our ultimate stronghold.\n\nIt may help us through a storm—but it cannot protect us from every storm. And it certainly cannot save us when Jehovah's judgment comes.\n\nThere is another danger that may be even more subtle.\n\nIt isn't just having wealth that can become a problem. It is what we are willing to do to get more of it.\n\nA brother who served in Thailand told me something that really stayed with me. He has heard brothers and sisters there pray that those of us who live with greater material abundance will not be overtaken by our wealth.\n\nThink about that.\n\nThey can see through the internet what is available in other parts of the world. With a smartphone, someone living with relatively little can see beautiful homes, expensive cars, vacations, technology, and all kinds of material comforts.\n\nNaturally, some may begin to think, "I want that too."\n\nBut these brothers and sisters also recognize something important: having more does not necessarily mean being happier.\n\nAnd that is a warning worth taking seriously.\n\nBecause if we become determined to have more, we can gradually begin compromising in small things.\n\nFor example, think about our business dealings.\n\nWould we ever be tempted to exaggerate what we're selling?\n\nWould we be completely honest about the condition of something we're selling?\n\nWould we be tempted to cut a corner because being completely honest might cost us money?\n\nOr think about our dealings with the government.\n\nWhen we report our taxes, are we determined to be completely honest? Even when we think, "Everybody does it," or "It's only a little bit"?\n\nThose may seem like small matters.\n\nBut remember what Jesus said about being faithful in what is least.\n\nThe issue isn't simply the amount of money involved.\n\nThe issue is: Whose stronghold am I trusting?\n\nAm I willing to sacrifice some financial gain in order to maintain a clean conscience before Jehovah?\n\n(READ) Proverbs 11:1:\n"A dishonest scale is detestable to Jehovah, but an accurate weight brings him pleasure."\n\nIn Bible times, dishonest scales could allow a merchant to make a little extra money by giving a customer less than he had paid for.\n\nJehovah hated that kind of dishonesty.\n\nAnd he hasn't changed.\n\nSo whether we're dealing with a customer, an employee, a contractor, a business partner, the government, or anyone else, we want to be known as people who are honest in all things.\n\nThat may sometimes cost us money.\n\nIt may mean turning down an opportunity.\n\nIt may mean admitting a mistake instead of hiding it.\n\nIt may mean paying what we actually owe instead of looking for a way around it.\n\nBut that's precisely the point.\n\nWe don't want our desire for wealth to become stronger than our desire to please Jehovah.\n\nBecause wealth can give us options.\n\nIt can make difficult circumstances easier.\n\nIt can provide a measure of security.\n\nBut it cannot be our stronghold.\n\nAnd if pursuing it causes us to compromise our honesty—even in what seems like a little thing—we've begun building our security on the wrong foundation.\n\nSo let's be determined to conduct ourselves honestly in all things.\n\nJehovah—not wealth—is our stronghold.`,
-      w3: `(READ) Proverbs 3:5, 6:\n"Trust in Jehovah with all your heart, and do not rely on your own understanding. In all your ways take notice of him, and he will make your paths straight."\n\nWhat does it mean to take notice of God "in all your ways"? It means God’s will isn't a weekend activity or an afterthought—it is the lens through which we make every decision, big or small.\n\nAsk yourself honestly:\n• Do my daily schedules reflect that spiritual things come first? [PAUSE for 3 seconds]\n• Is personal Bible study and prayer a daily necessity, or just something I fit in if I have time? [PAUSE for 3 seconds]\n• Do I view congregation meetings and field ministry as vital appointments, or as an optional routine?\n\nWhen we prioritize Jehovah's will in the small, unglamorous choices of everyday life, we build a muscle memory of obedience. That daily habit ensures that when major crises strike, running to Jehovah is already second nature.`,
-      s1: `Making Jehovah our stronghold isn't just for the future—it protects us through the present-day trials of this system.\n\n(READ) Psalm 37:39, 40:\n"The salvation of the righteous is from Jehovah; he is their fortress in the time of distress. Jehovah will help them and rescue them... because they take refuge in him."\n\nConsider the apostle Paul. He had a physical "thorn in the flesh" that he begged three times to be removed. Jehovah didn't perform a miraculous cure, but gave him power to endure. Paul succeeded because he recognized his limitations realistically, kept active in serving others despite his condition, and accepted help from his brothers (Galatians 4:14, 15).\n\nIf you are dealing with chronic illness or advancing age, remember that your small, steady efforts in Jehovah's service carry immense value. Do not isolate yourself. Accepting love and support from brothers and sisters is one of the primary ways Jehovah fortifies us.`,
-      s2: `Sometimes, the external trial comes from within our own spiritual family. In any congregation, different personalities and imperfect human traits will occasionally clash. Hurt feelings happen.\n\nPicture this: You are running through a downpour toward that sturdy brick house, and someone accidentally bumps into you at the door. Do you stop in the pouring rain, stand on the doorstep, and start arguing about who had the right of way?\n\nOf course not! You both step inside the shelter together! Arguing out in the storm only exposes both of you to danger.\n\nColossians 3:13 urges us: "Continue putting up with one another and forgiving one another freely..."\n\nForgiving small offenses now is practical training for the future. Unity in the congregation is our collective protection. Ask yourself: Do I want to be "right," or do I want to be safe inside Jehovah's stronghold?`,
-      s3: `King David was hunted by King Saul, yet he made Jehovah his stronghold rather than trusting in his own military strength. We face opposition today, and sometimes, the heartbreak of losing someone we love.\n\nWhat if a family member steps off the safe path and wanders back out into the storm? It causes immense heartache. But going out into the dark, slick terrain after them puts our own spiritual footing at risk.\n\nWe stay securely on Jehovah’s high ground, keeping the lights on and the doors open, praying they will see the warmth of the stronghold and choose to return.`,
-      s4: `We've spent some time considering the coming storm and the importance of taking refuge in Jehovah now. But I don't want us to leave this talk thinking only about danger. The Bible also tells us something beautiful about what it's like to live under Jehovah's protection.\n\nNotice these words at Psalm 5:11, 12:\n\n(READ) Psalm 5:11, 12:\n"But all those who take refuge in you will rejoice; they will always shout joyfully. You will block approach to them, and those loving your name will rejoice in you. For you will bless anyone righteous, O Jehovah; you will surround them with approval as with a large shield."\n\nDid you notice how many times the thought of protection and security comes through?\n"Those who take refuge in you."\n"You will block approach to them."\n\nAnd then Jehovah says: "You will surround them with approval as with a large shield."\n\nThink about that for a moment. A shield doesn't mean the soldier never encounters an enemy. The shield means that when the attack comes, there is something between the person and the danger.\n\nIn the same way, making Jehovah our stronghold doesn't mean that we'll never experience hardship. We may still get wet in the storm. We may come through the door of that brick house sopping wet. But we're inside. We're somewhere safe. We can recover. We can be stabilized.\n\nAnd notice the first part of verse 11: "All those who take refuge in you will rejoice."\n\nThat's not the picture of someone hiding in terror, wondering whether Jehovah will abandon them. It's the picture of someone who has confidence in the one they've chosen as their refuge.\n\nJehovah is not simply the place we run to when we're scared. He is the one we can trust every day.`,
-      c1: `A great spiritual storm is approaching. Dark clouds are gathering over this system of things. Ask yourself honestly today: Where am I standing?\n\n• Am I relying on the deceptive open pavilion of human wisdom, financial savings, and worldly thinking?\n• Or am I safely inside the sturdy, enclosed brick building of Jehovah God, living in harmony with his righteous standards?\n\nIf you realize there are areas in your life where you've been leaning on your own understanding, make the run for the shelter now.\n\nRemember the principle of Luke 16:10: prove faithful in the small daily decisions—your private thoughts, your daily prayer, your moral speech, and your willingness to forgive your brother. If you make Jehovah your stronghold in the small decisions of life today, he will prove to be your unshakeable refuge through present-day trials, through the Great Tribulation, and into his peaceful new world forever.`
+      f2: `The Bible gives us the comforting answer:\n\n(READ) Nahum 1:6, 7:\n"Who can stand before his indignation? And who can withstand the heat of his anger?... Jehovah is good, a stronghold in the day of distress. He is mindful of those seeking refuge in him."\n\nJehovah is a stronghold. Just what is a stronghold? It is a permanent, heavily fortified structure designed to withstand the most violent assaults.\n\nThe verse also says Jehovah is 'mindful' of those seeking refuge. Our Study Bible brings out an interesting point in the study note here: the original-language expression conveys the thought that Jehovah knows those taking refuge in him and cares for them. That makes this very personal.\n\nPicture that storm again. The sky suddenly turns black. Lightning strikes a tree just a short distance away. And in that instant, someone who had been lingering outside realizes: "I should have gone into the brick house sooner."\n\nMaybe there is still an opportunity to run. Maybe the door is still open. But now the situation is completely different. The person isn't calmly walking toward shelter anymore; they're running through a violent storm, with lightning striking around them.\n\nWould you really want to wait until that moment to decide whether Jehovah is your stronghold? Why take that risk? Jehovah is already telling us where the safe place is. He is already inviting those seeking refuge in him to come to him. The time to make Jehovah our stronghold is now—not when the first lightning strikes.\n\nYes, the scripture says: “Jehovah is good.” There is no doubt about that. But remember the principle in scripture: you must not put Jehovah your God to the test.`,
+      f3: `And that's why what we do today matters so much. We don't want our first real test of trust in Jehovah to come when the storm is already overhead.\n\nJesus stated a fundamental principle at Luke 16:10:\n"The person faithful in what is least is faithful also in much."\n\nSmall decision → repeated habit → established character → ability to handle larger tests of faith.\n\nEvery small decision to obey Jehovah is a kind of spiritual training. When we choose honesty when dishonesty would be easier, when we control our thoughts when nobody else would know, when we forgive instead of holding onto resentment, when we put spiritual things first even when we're tired—those may seem like small decisions. But they are building something inside us.\n\nWe don't suddenly develop strong faith when a major test arrives. A major test reveals the faith we've been building all along.\n\nWe don't build our relationship with Jehovah when the biggest test of faith arrives. It takes hard work to gain Jehovah’s approval. We build it through the small decisions we make every day. So how can we make Jehovah our stronghold now? Let's consider three areas where those daily decisions matter.`,
+      w1: `(READ) Proverbs 10:29a:\n"The way of Jehovah is a stronghold for the blameless one..."\n\nJehovah's moral laws form the solid, impenetrable walls of our stronghold. Stepping outside these boundaries—relying on human moral thinking—is like opening the heavy fortress door and walking unprotected into the freezing rain.\n\nThe challenge for us is subtle. The danger isn't just that the world outside has lowered its standards; the danger is that we might slowly allow the world's mindset to reshape our own thinking. We have to ask ourselves: Are my personal moral boundaries truly aligned with Jehovah's, or have I started making subtle allowances?\n\nColossians 3:5 urges us: "Deaden, therefore, your body members..." Jesus used vivid language when he said that if your hand makes you stumble, cut it off (Mark 9:43). He wasn't talking about self-mutilation; he was talking about radical, decisive action in our daily choices.\n\nIf you are single, do you view dating as casual recreation, or are you guarding your moral boundaries today? If you are married, do you reject subtle flirting or the private trap of pornography? Deadening sinful desires feels difficult if we try to do it alone. But when we pray, read God's Word daily, and stay close to the congregation, Jehovah gives us the strength to remain blameless and safe inside his stronghold.`,
+      w2: `(READ) Proverbs 18:11:\n"The wealth of the rich is his fortified city; it is like a protective wall in his imagination."\n\nNotice that last expression: "in his imagination." Money can certainly provide a measure of security. Having savings can help us through an unexpected repair, a period of unemployment, or a serious financial setback. So the Bible isn't teaching that having money is inherently wrong. But money cannot be our ultimate stronghold. It may help us through a temporary setback—but it cannot protect us from every storm. And it certainly cannot save us when Jehovah's judgment comes.\n\nThere is another danger that may be even more subtle. It isn't just having wealth that can become a problem; it is what we are willing to do to get more of it.\n\nA brother who served in Thailand told me something that really stayed with me. He heard brothers and sisters there pray that those living with greater material abundance will not be overtaken by their wealth. Think about that. Through the internet and smartphones, someone living with relatively little can see beautiful homes, expensive cars, vacations, technology, and all kinds of comforts. Naturally, some may begin to think, "I want that too." But these brothers and sisters also recognize something important: having more does not necessarily mean being happier. Materialism is not merely the problem of having too much; it is the trap of constantly wanting what we see others have.\n\nIf we become determined to have more, we can gradually begin compromising in small things. Think about our business dealings. Would we ever be tempted to exaggerate what we're selling? Would we cut a corner because being completely honest might cost us money? Or think about our taxes—are we determined to be completely honest, even when we think, "Everybody does it," or "It's only a little bit"?\n\nThose may seem like small matters. But remember Luke 16:10. The issue is: Whose stronghold am I trusting?\n\n(READ) Proverbs 11:1:\n"A dishonest scale is detestable to Jehovah, but an accurate weight brings him pleasure."\n\nWhether we are dealing with a customer, employer, contractor, business partner, or the government, we want to be known as people who are honest in all things. That may sometimes cost us money. It may mean turning down an opportunity or paying what we actually owe. But if pursuing wealth causes us to compromise our honesty—even in what seems like a little thing—we've begun building our security on the wrong foundation. Jehovah—not wealth—is our stronghold.`,
+      w3: `Avoiding the snare of materialism isn't just about what we say no to—it's about what we choose to put first. If wealth isn't our stronghold, where are we actually placing our confidence each day?\n\n(READ) Proverbs 3:5, 6:\n"Trust in Jehovah with all your heart, and do not rely on your own understanding. In all your ways take notice of him, and he will make your paths straight."\n\nWhat does it mean to take notice of God "in all your ways"? It means God’s will isn't a weekend activity or an afterthought—it is the lens through which we make every decision, big or small.\n\nAsk yourself honestly:\n• Do my daily schedules reflect that spiritual things come first?\n• Is personal Bible study and prayer a daily necessity, or just something I fit in if I have time?\n• Do I view congregation meetings and field ministry as vital appointments, or as an optional routine?\n\nWhen we prioritize Jehovah's will in the small, unglamorous choices of everyday life, we build a muscle memory of obedience. That daily habit ensures that when major crises strike, running to Jehovah is already second nature.`,
+      s1: `Whether it is guarding our moral boundaries, keeping wealth in its proper place, or making God’s will our absolute priority, each small choice keeps us firmly anchored inside Jehovah’s stronghold—not just for the Great Tribulation ahead, but for the heavy, present-day storms we are already weathering right now.\n\n(READ) Psalm 37:39, 40:\n"The salvation of the righteous is from Jehovah; he is their fortress in the time of distress. Jehovah will help them and rescue them... because they take refuge in him."\n\nConsider the apostle Paul. He had a physical "thorn in the flesh" that he begged three times to be removed. Jehovah didn't perform a miraculous cure, but gave him power to endure. Paul succeeded because he recognized his limitations realistically, kept active in serving others despite his condition, and accepted help from his brothers (Galatians 4:14, 15).\n\nIf you are dealing with chronic illness or advancing age, remember that your small, steady efforts in Jehovah's service carry immense value. Do not isolate yourself. Accepting love and support from brothers and sisters is one of the primary ways Jehovah fortifies us.`,
+      s2: `Sometimes, the trial comes from within our own spiritual family. In any congregation, different personalities and imperfect human traits will occasionally clash. Hurt feelings happen.\n\nPicture this: You are running through a downpour toward that sturdy brick house, and someone accidentally bumps into you at the door. Do you stop in the pouring rain, stand on the doorstep, and start arguing about who had the right of way?\n\nOf course not! You both step inside the shelter together! Arguing out in the storm only exposes both of you to danger.\n\nColossians 3:13 urges us: "Continue putting up with one another and forgiving one another freely..."\n\nForgiving small offenses now is practical training for the future. Unity in the congregation is our collective protection. Ask yourself: Do I want to be "right," or do I want to be safe inside Jehovah's stronghold?`,
+      s3: `King David was hunted by King Saul, yet he made Jehovah his stronghold rather than trusting in his own strength. When we face opposition today, what can we expect of Jehovah?\n\n(READ) Psalm 18:19:\n"He brought me out into a place of safety; He rescued me because he was pleased with me."\n\nOpposers are no match for Jehovah’s ability to rescue those trusting in him.\n\nWe may also face the heartbreak of someone removing themselves from Jehovah’s stronghold. What if a family member or close friend steps out of the safe house and wanders back out into the storm? It causes immense heartache. But going out into the dark, slick terrain after them puts our own spiritual footing at risk.\n\nWe stay securely in Jehovah’s stronghold, keeping the lights on and the doors open, praying they will see the warmth of the stronghold and choose to return.`,
+      s4: `We've spent some time considering the coming storm and the importance of taking refuge in Jehovah now. But I don't want us to leave this talk thinking only about danger. The Bible also tells us something beautiful about what it's like to live under Jehovah's protection.\n\n(READ) Psalm 5:11, 12:\n"But all those who take refuge in you will rejoice; They will always shout joyfully. You will block approach to them, And those loving your name will exult in you. For you will bless anyone righteous, O Jehovah; You will surround them with approval as with a large shield."\n\nDid you notice how many times the thought of protection and security comes through? "Those who take refuge in you." "You will block approach to them." And then: "You will surround them with approval as with a large shield."\n\nThink about that for a moment. A shield doesn't mean the soldier never encounters an enemy. The shield means that when the attack comes, there is something between the person and the danger.\n\nIn the same way, making Jehovah our stronghold doesn't mean that we'll never experience hardship. We may still get wet in the storm. We may come through the door of that brick house sopping wet. But we're inside. We're somewhere safe. We can recover. We can be stabilized.\n\nAnd notice the first part of verse 11: "All those who take refuge in you will rejoice." That’s not the picture of someone hiding in terror; it’s the picture of someone who has complete confidence in their refuge. Jehovah is not simply the place we run to when we're scared—he is the one we can trust every day.`,
+      c1: `A great spiritual storm is approaching. Dark clouds are gathering over this system of things. Ask yourself honestly today: Where am I standing?\n\n• Am I relying on the deceptive open pavilion of human wisdom, financial savings, and worldly thinking?\n• Or am I safely inside the sturdy, enclosed brick building of Jehovah God, living in harmony with his righteous standards?\n\nIf you realize there are areas in your life where you've been leaning on your own understanding, make the run for the shelter now. Don't wait for the skies to turn black or lightning to strike to get safe under Jehovah’s protection.\n\nThis system will chew us up and beat us down. But Jehovah wants to help us and restore us. He has warmth and love inside his shelter.\n\nRemember the principle of Luke 16:10: prove faithful in the small daily decisions—your private thoughts, your daily prayer, your moral speech, honest business practices, and your willingness to forgive your brother. We don't know exactly what every future storm will look like, but we know where the safe place is. If you make Jehovah your stronghold in the small decisions of life today, he will prove to be your unshakeable refuge through present-day trials, through the Great Tribulation, and into his peaceful new world forever.`
     };
 
     const FlashcardBubble = ({ card, textColor, borderColor, lightBg, onJumpToScript, isEditMode, onUpdateCard, onDeleteCard }) => {
@@ -364,12 +373,10 @@
     };
 
     const PresentationTimer = ({ totalMinutes, setTotalMinutes }) => {
-      // Auto-start at the exact total minutes plus 30 seconds buffer
       const [seconds, setSeconds] = useState((totalMinutes * 60) + 30);
       const [isRunning, setIsRunning] = useState(true);
       const initialMount = useRef(true);
 
-      // Only sync if totalMinutes changes through edit mode
       useEffect(() => {
         if (initialMount.current) {
           initialMount.current = false;
@@ -483,19 +490,6 @@
                               </blockquote>
                             );
                           }
-                          // Safely mapping the PAUSE emphasis
-                          const parts = paragraph.split(/(\[PAUSE for 3 seconds\])/);
-                          if (parts.length > 1) {
-                            return (
-                              <p key={pIdx}>
-                                {parts.map((part, i) => 
-                                  part === '[PAUSE for 3 seconds]' 
-                                  ? <strong key={i} className="text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded animate-pulse">{part}</strong>
-                                  : part
-                                )}
-                              </p>
-                            );
-                          }
                           return <p key={pIdx}>{paragraph}</p>;
                         })}
                       </div>
@@ -512,17 +506,66 @@
     const App = () => {
       const [viewMode, setViewMode] = useState('mindmap'); // 'mindmap' | 'script'
       const [isEditMode, setIsEditMode] = useState(false);
-      const [isFullscreen, setIsFullscreen] = useState(false);
       const [talkTitle, setTalkTitle] = useState(DEFAULT_TALK_TITLE);
       const [totalMinutes, setTotalMinutes] = useState(DEFAULT_TIME_MINUTES);
       const [outline, setOutline] = useState(DEFAULT_OUTLINE);
       const [scripts, setScripts] = useState(DEFAULT_SCRIPTS);
       const [showModal, setShowModal] = useState(false);
       const [toastMsg, setToastMsg] = useState(null);
+      const [isFullscreen, setIsFullscreen] = useState(false);
+
+      // --- WAKE LOCK API ---
+      useEffect(() => {
+        let wakeLock = null;
+        const requestWakeLock = async () => {
+          try {
+            if ('wakeLock' in navigator) {
+              wakeLock = await navigator.wakeLock.request('screen');
+            }
+          } catch (err) {
+            console.error(`Wake Lock error: ${err.name}, ${err.message}`);
+          }
+        };
+
+        requestWakeLock();
+        
+        const handleVisibilityChange = () => {
+          if (wakeLock !== null && document.visibilityState === 'visible') {
+            requestWakeLock();
+          }
+        };
+
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+        return () => {
+          document.removeEventListener('visibilitychange', handleVisibilityChange);
+          if (wakeLock) wakeLock.release();
+        };
+      }, []);
+
+      // --- FULLSCREEN HANDLER ---
+      const toggleFullscreen = () => {
+        if (!document.fullscreenElement) {
+          document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable fullscreen: ${err.message}`);
+            showToast("Fullscreen not supported on this device/browser.");
+          });
+        } else {
+          if (document.exitFullscreen) {
+            document.exitFullscreen();
+          }
+        }
+      };
+
+      useEffect(() => {
+        const handleFullscreenChange = () => {
+          setIsFullscreen(!!document.fullscreenElement);
+        };
+        document.addEventListener('fullscreenchange', handleFullscreenChange);
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      }, []);
 
       // --- PERSISTENCE: Sync state across reloads & cloud ---
       useEffect(() => {
-        // 1. First load from device
         const savedData = localStorage.getItem('talk_app_data_stronghold');
         if (savedData) {
           try {
@@ -536,7 +579,6 @@
           }
         }
 
-        // 2. Initialize Firebase realtime synchronization if available
         if (window.initFirebaseSync) {
           window.initFirebaseSync((cloudData) => {
             if (cloudData) {
@@ -549,63 +591,6 @@
         }
       }, []);
 
-      // --- WAKE LOCK (Keep screen awake) ---
-      useEffect(() => {
-        let wakeLock = null;
-
-        const requestWakeLock = async () => {
-          if ('wakeLock' in navigator) {
-            try {
-              wakeLock = await navigator.wakeLock.request('screen');
-              console.log('Screen Wake Lock active');
-              
-              wakeLock.addEventListener('release', () => {
-                console.log('Screen Wake Lock released');
-              });
-            } catch (err) {
-              console.error(`Wake Lock error: ${err.name}, ${err.message}`);
-            }
-          }
-        };
-
-        // Request immediately on mount
-        requestWakeLock();
-
-        // Re-request when the app comes back to the foreground
-        const handleVisibilityChange = () => {
-          if (wakeLock !== null && document.visibilityState === 'visible') {
-            requestWakeLock();
-          }
-        };
-
-        document.addEventListener('visibilitychange', handleVisibilityChange);
-
-        return () => {
-          document.removeEventListener('visibilitychange', handleVisibilityChange);
-          if (wakeLock !== null) {
-            wakeLock.release();
-          }
-        };
-      }, []);
-
-      // --- FULLSCREEN HANDLER ---
-      const toggleFullscreen = () => {
-        if (!document.fullscreenElement) {
-          document.documentElement.requestFullscreen().catch(err => console.error("Fullscreen error:", err));
-        } else {
-          document.exitFullscreen();
-        }
-      };
-
-      useEffect(() => {
-        const handleFullscreenChange = () => {
-          setIsFullscreen(!!document.fullscreenElement);
-        };
-        document.addEventListener('fullscreenchange', handleFullscreenChange);
-        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange);
-      }, []);
-
-      // Auto-save changes locally and to cloud
       const persistState = (newTitle, newMin, newOutline, newScripts) => {
         const payload = {
           talkTitle: newTitle,
@@ -614,9 +599,7 @@
           scripts: newScripts,
           updatedAt: Date.now()
         };
-        // Local Device Storage
         localStorage.setItem('talk_app_data_stronghold', JSON.stringify(payload));
-        // Cloud Sync
         if (window.saveTalkDataToCloud) {
           window.saveTalkDataToCloud(payload);
         }
@@ -745,15 +728,15 @@
           <div className="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-b border-slate-800 px-3 sm:px-6 py-2.5 flex justify-between items-center shadow-xl">
             <PresentationTimer totalMinutes={totalMinutes} setTotalMinutes={setTotalMinutes} />
 
-            {/* Actions: Edit Mode & View Switcher */}
+            {/* Actions: Edit Mode, Fullscreen, & View Switcher */}
             <div className="flex items-center space-x-2">
+              
               <button 
                 onClick={toggleFullscreen}
-                className="p-2 sm:px-3 sm:py-1.5 rounded-full font-bold text-xs sm:text-sm flex items-center transition-all bg-slate-800 text-slate-300 border border-slate-700 hover:text-white"
+                className="p-2 sm:px-3 sm:py-2 rounded-full font-bold text-xs sm:text-sm flex items-center transition-all bg-slate-800 text-slate-300 border border-slate-700 hover:text-white"
                 title="Toggle Fullscreen"
               >
-                {isFullscreen ? <Minimize className="w-4 h-4 sm:mr-1.5" /> : <Maximize className="w-4 h-4 sm:mr-1.5" />}
-                <span className="hidden sm:inline">{isFullscreen ? 'Exit Full' : 'Fullscreen'}</span>
+                {isFullscreen ? <Minimize className="w-4 h-4"/> : <Maximize className="w-4 h-4"/>}
               </button>
 
               <button 
@@ -945,3 +928,4 @@
   </script>
 </body>
 </html>
+
